@@ -1,1 +1,1 @@
-<p>Prišlo je do napake.</p>
+<p>There was an error.</p>

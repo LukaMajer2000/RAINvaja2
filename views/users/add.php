@@ -1,7 +1,8 @@
 <h2>Add new user:</h2>
-<form action="?controller=ads&action=store" method="POST" enctype="multipart/form-data">
-    <label>Naslov</label><input type="text" name="title" /> <br />
-    <label>Vsebina</label><textarea name="description" rows="10" cols="50"></textarea> <br />
-    <label>Slika</label><input type="file" name="image" /> <br />
-    <input type="submit" name="submit" value="Objavi" /> <br />
+<form action="?Controller=users&action=save" method="POST">
+    <div>
+        <label>Username:</label><input type="text" placegolder="Username" name="username" /> <br />
+        <label>Password:</label><input type="password" placegolder="Password" name="password" /> <br />
+        <input type="submit" name="submit" value="Add" /> <br />
+    </div>
 </form>
