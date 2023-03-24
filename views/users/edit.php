@@ -1,6 +1,5 @@
-<h2>Objavi oglas</h2>
-<form action="?controller=ads&action=update" method="POST" enctype="multipart/form-data">
-    <!-- ID od oglasa, ki ga želimo urediti, pošljemo v POST s pomočjo avtomatsko izpolnjenega skritega vnosnega polja <input type='hidden'>-->
+<h2>Edit user <?php echo $user->username; ?></h2>
+<form action="?Controller=ads&action=update" method="POST" enctype="multipart/form-data">
     <input type="hidden" name="id" value="<?php echo $ad->id; ?>" />
     <label>Naslov</label><input type="text" name="title" value="<?php echo $ad->title; ?>" /> <br />
     <label>Vsebina</label><textarea name="description" rows="10" cols="50"><?php echo $ad->description; ?></textarea> <br />
