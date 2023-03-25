@@ -27,7 +27,7 @@ class userController{
 
     // Potrdi urejanje
     public function editConfirm(){
-        $user=User::edit($_POST["id"],$_POST["firstname"], $_POST["surname"], $_POST["email"], $_POST["address"], $_POST["post"], $_POST["phone"], $_POST["gender"], $_POST["birthday"], $_POST["isAdmin"]);
+        $user=User::edit($_POST["id"],$_POST["firstname"], $_POST["surname"], $_POST["email"], $_POST["address"], $_POST["phone"], $_POST["gender"], $_POST["isAdmin"]);
         require_once("views/users/editSuccessful.php");
     }
 

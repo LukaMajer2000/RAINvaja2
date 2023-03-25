@@ -1,17 +1,18 @@
 <?php
+session_start();
 
-//razred, ki skrbi za povezavo z bazo (Vzorec MVC zagovarja principe OOP)
+if(isset($_SESSION['LAST_ACTIVITY']) && time() - $_SESSION['LAST_ACTIVITY'] < 1800){
+  session_regenerate_id(true);
+}
+$_SESSION['LAST_ACTIVITY'] = time();
+
 class Db
 {
   private static $instance = NULL;
-
-  //Funkcija getInstance vrne povezavo z bazo. Ob prvem klicu ustvari povezavo in jo shrani v statični spremenljivki. Ob nadaljnjih klicih vrača povezavo iz spomina
   public static function getInstance()
   {
     if (!isset(self::$instance)) {
-
-      self::$instance = mysqli_connect("localhost", "root", "", "vaja1");
-      self::$instance->set_charset("UTF8");
+      self::$instance = mysqli_connect("localhost", "root", "", "vaja2");
     }
     return self::$instance;
   }

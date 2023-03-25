@@ -13,9 +13,46 @@
 	<h1>BootlegEbay Admin Page</h1>
 	<div>
 		<nav>
-			<a href="myProfile.php">Profile control</a>
+			<a href="myProfile.php">Profile control:</a>
 			<button type="button" data-toggle="collapse">
 				<span></span>
 			</button>
+			<div>
+				<ul>
+					<li class="nav-item <?php if($Controller!="ads") echo("active");?>"><a class="nav-link" gref="index.php">Home</a></li>
+					<li class="nav-item"><a class="nav-link" gref="myAd.php">My ADs</a></li>
+					<li class="nav-item"><a class="nav-link" gref="upload.php">Upload AD</a></li>
+				</ul>
+
+		<ul>
+			<?php
+				$conn = new mysqli("localhost", "root", "", "vaja2");
+				$conn->set_charset("UTF8");
+				$id = $_SESSION["USER_ID"];
+				$res = mysqli_query($conn,"SELECT * FROM users where id='$id'");
+				if($row["isAdmin"!=null]){
+					?>
+						<li><a href="?Controller=users&action=index"><i class="fas fa-user"></i>Admin Page</a></li>
+					<?php
+				}
+				?>
+					<li><a href="logOut.php"><i class="fas fa-sign-int-alt"></i>Log Out</a></li>
+				<?php
+			?>
+		</ul>
+		</div>
 		</nav>
+
+
+		<div>
+			<div>
+				<br>
+					<?php require_once("routes.php");?>
+			</div>
+		</div>
 	</div>
+	<?php
+	include_once('footer.php');
+	?>
+</body>
+</html>

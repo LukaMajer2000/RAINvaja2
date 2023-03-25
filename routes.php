@@ -5,34 +5,31 @@
 */
 
 // Funkcija, ki kliče kontrolerje in hkrati vključuje njihovo kodo in kodo modela
-function call($controller, $action)
+function call($Controller, $action)
 {
   // Vključimo kodo controllerja in modela (pazimo na poimenovanje datotek)
-  require_once('controllers/' . $controller . '_controller.php');
-  require_once('models/' . $controller . '.php');
+  require_once('controllers/' . $Controller . '_Controller.php');
+  require_once('models/' . $Controller . '.php');
 
   // Ustvarimo kontroler
-  $o = $controller . "_controller"; //generiramo ime razreda controllerja
-  $controller = new $o; //ustvarimo instanco razreda (ime razreda je string spremenljivka)
+  $o = $Controller . "_controller"; //generiramo ime razreda controllerja
+  $Controller = new $o; //ustvarimo instanco razreda (ime razreda je string spremenljivka)
 
   //pokličemo akcijo na kontrolerju (ime funkcije je string spremenljivka)
-  $controller->{$action}();
+  $Controller->{$action}();
 }
 
 // Seznam vseh dovoljenih controllerjev in njihovih akcij. Z njegovo pomočjo bi 
 // lahko definirali tudi pravice (ustrezno zmanjšali nabor akcij pod določenimi pogoji)
-$controllers = array(
-  'pages' => ['error', 'api'],
-  'ads' => ['index', 'show', 'create', 'store', 'edit', 'update', 'delete']
+$Controllers = array(
+  'pages' => ['home', 'error'],
+  'users' => ['add', 'delete', 'edit', 'save', 'clean', 'index', 'display']
 );
 
 // Preverimo, če zahteva kliče controller in akcijo iz zgornjega seznama
-if (
-  array_key_exists($controller, $controllers)
-  && in_array($action, $controllers[$controller])
-) {
+if ( array_key_exists($Controller, $Controllers) && in_array($action, $Controllers[$Controller])) {
   // Pokličemo akcijo
-  call($controller, $action);
+  call($Controller, $action);
 } else {
   // Izpišemo stran z napako
   call('pages', 'error');
