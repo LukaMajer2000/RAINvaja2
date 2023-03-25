@@ -1,19 +1,24 @@
 <?php
-/*
-  Enostaven primer controlletja, ki ne uporablja modela.
-  Njegova naloga je, da vrača statične HTML strani, kot je stran z napako.
-  Uporabili smo ga tudi za prikaz vmesnika, ki demonstrira uporabi API-ja.
-*/
-
 class pages_controller {
   public function error() {
     // Izpiše pogled s sporočilom o napaki
     require_once('views/pages/error.php');
   }
 
-  public function api(){
-    // Izpiše pogled, ki demonstrira uporabo API-ja
-    require_once('views/pages/api.php');
+  public function home(){
+    if(!isset($_GET["id"])){
+      if(isset($_SESSION["USER_ID"])){
+          $user = User::find($_SESSION["USER_ID"]);
+          $_GET["id"] = $_SESSION["USER_ID"];
+          require_once("views/pages/home.php");
+      }else{
+        require_once("views/pages/error.php");
+      }
+    }else{
+      $id = $_GET["id"];
+      $user = User::find("id");
+      require_once("views/pages/home.php");
+    }
   }
 }
 ?>

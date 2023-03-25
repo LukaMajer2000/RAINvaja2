@@ -31,6 +31,7 @@
                 ?>
                 <button class="btn btn-primary text-white bg-light"><a href="upload.php">Upload AD</a></button>
                 <button class="btn btn-primary text-white bg-light"><a href="myAd.php">Your ADs</a></button>
+                <button class="btn btn-primary text-white bg-light"><a href="myProfile.php">Your Profle</a></button>
                 <button class="btn btn-primary text-white bg-light"><a href="logOut.php">Log Out</a></button>
                 <?php
             }else{

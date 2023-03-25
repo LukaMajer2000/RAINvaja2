@@ -23,10 +23,7 @@
             <td><?php echo $user->username; ?></td>
             <td>
               <a href="?Controller=users&action=display&id=<?php echo $user->id; ?>">
-                <button>
-                  Display:
-                  <span class="translate-middle badge rounded-pill"><?php echo user::countAds($user->id);?></span>
-                </button>
+                <button>Display</button>
               </a>
             </td>
             <td>
