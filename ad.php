@@ -61,7 +61,43 @@ if($ad == null){
 		<a href="index.php"><button class="btn btn-primary">Back</button></a>
 	</div>
 	<hr/>
-</div>
+	<div class="comment">
+		<p>Comments:</p>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script type="text/javascript">
+		function deleted($id){
+			$.ajax({
+				url:"/api/comments/deleteComment" + $id,
+				method : "DELETE",
+				success: function(data){
+					console.log(data);
+					location.reaload();
+				}
+			})
+		}
+		$(document).ready(function() {
+		    $.ajax({
+		    	url: "/api/comments/loadAllComments" + <?php echo $ad->id;?>,
+		    	method: "GET",
+		        success: function(data){
+				console.log(data);
+				data.forEach(comment => {
+					$(".comments").append(`<h3>${comment.nickname} (${comment.email}) je ${comment.date} (${comment.ip}) Comment by: </h3><p>${comment.content}</p>`);
+					<?php
+					if(isset($_SESSION["USER_ID"])){
+						if($ad->user_id==$_SESSION["USER_ID"]){
+							echo "$('.comments'.append(`<button onclick='deleted(\${comment.id})'>Delete</button></p>`)";
+						}
+					}
+					?>
+				})
+				}
+			})
+		});
+		</script>
+		<a href="uploadComment.php?adid=<?php echo $ad->id?>"><button>Add comment:</button></a>
+	</div>
+
 
 <?php
 

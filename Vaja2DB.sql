@@ -119,3 +119,16 @@ CREATE TABLE IF NOT EXISTS `images` (
 
 /*INSERT INTO `images` (`id`, `file`, `adid`) VALUES
 	(1, 'img.png', 0);*/
+
+-- --------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS `comments`(
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `content` int(11) NOT NULL,
+  `nickname` int(11) NOT NULL,
+  `date` datetime DEFAULT NULL,
+  `email` int(11) NOT NULL,
+  `adid` int(11) NOT NULL,
+  `ip` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
