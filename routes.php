@@ -12,7 +12,7 @@ function call($Controller, $action)
   require_once('models/' . $Controller . '.php');
 
   // Ustvarimo kontroler
-  $o = $Controller . "_controller"; //generiramo ime razreda controllerja
+  $o = $Controller . "_Controller"; //generiramo ime razreda controllerja
   $Controller = new $o; //ustvarimo instanco razreda (ime razreda je string spremenljivka)
 
   //pokličemo akcijo na kontrolerju (ime funkcije je string spremenljivka)
@@ -23,7 +23,7 @@ function call($Controller, $action)
 // lahko definirali tudi pravice (ustrezno zmanjšali nabor akcij pod določenimi pogoji)
 $Controllers = array(
   'pages' => ['home', 'error'],
-  'users' => ['add', 'delete', 'edit', 'save', 'clean', 'index', 'display']
+  'users' => ['add', 'delete', 'edit', 'editConfirm', 'save', 'clean', 'index', 'display']
 );
 
 // Preverimo, če zahteva kliče controller in akcijo iz zgornjega seznama

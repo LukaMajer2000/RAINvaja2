@@ -1,6 +1,6 @@
 <h3>Control panel:</h3>
 <a href="?Controller=users&action=add"><button>Add</button></a>
-<a href="?Controller=users&action=deleteAll&id=<?php echo $_SESSION["USER_ID"]; ?>" onclick="return confirm('Are you sure?')"><button>Delete all</button></a>
+<a href="?Controller=users&action=clean&id=<?php echo $_SESSION["USER_ID"]; ?>" onclick="return confirm('Are you sure?')"><button>Delete all</button></a>
 <div>
   <table>
 

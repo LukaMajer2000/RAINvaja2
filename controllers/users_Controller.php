@@ -1,5 +1,5 @@
 <?php
-class userController{
+class users_Controller{
 
     // Dodajanje
     public function add() {
@@ -9,7 +9,7 @@ class userController{
     // Brisanje
     public function delete() {
         if(!isset($_GET["id"])){
-            return call("save", "error");
+            return call("pages", "error");
             // Kliče se error, če pride do napake, return preskoči
         }
         User::delete($_GET["id"]);
@@ -19,15 +19,15 @@ class userController{
     // Uredi
     public function edit() {
         if(!isset($_GET["id"])){
-            return call("save", "error");
+            return call("pages", "error");
         }
         $user = User::find($_GET["id"]);
-        require_once("views/users/editSuccessful.php");
+        require_once("views/users/edit.php");
     }
 
     // Potrdi urejanje
     public function editConfirm(){
-        $user=User::edit($_POST["id"],$_POST["firstname"], $_POST["surname"], $_POST["email"], $_POST["address"], $_POST["phone"], $_POST["gender"], $_POST["isAdmin"]);
+        $user = User::edit($_POST["id"],$_POST["firstname"], $_POST["surname"], $_POST["email"], $_POST["address"], $_POST["phone"], $_POST["gender"], $_POST["isAdmin"]);
         require_once("views/users/editSuccessful.php");
     }
 
@@ -39,14 +39,14 @@ class userController{
 
     public function clean() {
         if(!isset($_GET["id"])){
-            return call("save","error");
+            return call("pages","error");
         }
         User::deleteAll($_GET["id"]);
         require_once("views/users/deleteAll.php");
     }
 
     public function index() {
-        $user = User::all();
+        $users = User::all();
         require_once("views/users/index.php");
     }
 

@@ -31,7 +31,7 @@ USE `vaja1`;
 --
 -- Struktura tabele `ads`
 --
-vaja1vaja1
+
 CREATE TABLE IF NOT EXISTS `ads` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` text COLLATE utf8_slovenian_ci NOT NULL,
@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `phone` text COLLATE UTF8_SLOVENIAN_CI,
   `gender` text COLLATE UTF8_SLOVENIAN_CI,
   `birthday` text COLLATE UTF8_SLOVENIAN_CI,
-  `isAdmin` text COLLATE UTF9_SLOVENIAN_CI,
+  `isAdmin` text COLLATE UTF8_SLOVENIAN_CI,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
 COMMIT;
@@ -123,7 +123,8 @@ CREATE TABLE IF NOT EXISTS `images` (
 -- --------------------------------------------------------
 
 CREATE TABLE IF NOT EXISTS `comments`(
-  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
   `content` int(11) NOT NULL,
   `nickname` int(11) NOT NULL,
   `date` datetime DEFAULT NULL,

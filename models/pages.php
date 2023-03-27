@@ -30,7 +30,7 @@ public function __construct($id, $username, $password, $email, $firstname, $surn
 
 public static function find($id){
     $id = intval($id);
-    $dataBase = DB::getInstance();
+    $dataBase = Db::getInstance();
     $res = mysqli_query($dataBase,"SELECT * FROM users WHERE id=$id");
     $row = mysqli_fetch_assoc($res);
     $res2 = mysqli_query($dataBase,"SELECT COUNT(*) FROM ads WHERE id=$id");

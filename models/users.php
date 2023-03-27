@@ -45,9 +45,8 @@ public static function add($username,$password){
 public static function edit($id,$firstname,$surname,$email,$address,$phone,$gender,$isAdmin){
     $id = intval($id);
     $dataBase = Db::getInstance();
-    //$gender = substr($gender,0,0);
     $admin=intval($isAdmin);
-    $res = mysqli_query($dataBase,"UPDATE users SET firesname='$firstname',surname='$surname',email='$email',address='$address',phone='$phone',gender='$gender',isAdmin='$admin' WHERE id='$id'");
+    $res = mysqli_query($dataBase,"UPDATE users SET firstname='$firstname',surname='$surname',email='$email',address='$address',phone='$phone',gender='$gender',isAdmin='$admin' WHERE id='$id'");
     return User::find($id);
 }
 
@@ -89,7 +88,7 @@ public static function all(){
 
 public static function find($id){
     $id = intval($id);
-    $dataBase = DB::getInstance();
+    $dataBase = Db::getInstance();
     $res = mysqli_query($dataBase,"SELECT * FROM users WHERE id=$id");
     $row = mysqli_fetch_assoc($res);
 

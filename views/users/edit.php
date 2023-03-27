@@ -1,5 +1,5 @@
 <h2>Edit user: <?php echo $user->username; ?></h2>
-<form action="?Controller=ads&action=update" method="POST" enctype="multipart/form-data">
+<form action="?Controller=users&action=editConfirm" method="POST" enctype="multipart/form-data">
     <div class="form-group">
         <label for="id">Id:</label><input type="text" name="id" value="<?php echo $user->id;?>" readonly/><br>
         <label for="username">Username:</label><input type="text" name="username" value="<?php echo $user->username;?>"/><br>

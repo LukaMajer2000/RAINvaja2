@@ -8,7 +8,7 @@ if(isset($_SERVER["PATH_INFO"])){
     $request = "";
 }
 
-$Db=mysqli_connect("localhost", "root", "", "vaja2");
+$Db=mysqli_connect("localhost", "root", "", "vaja1");
 $Db->set_charset("UTF8");
 
 if(isset($request[0])&&($request[0]=="comments")){

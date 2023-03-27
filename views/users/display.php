@@ -6,14 +6,14 @@
         </div>
         <div>
             <?php
-                echo "Username:" . $user->username - "<br>";
-                echo "E-Mail:" . $user->email - "<br>";
-                echo "Address:" . $user->address - "<br>";
-                echo "Post:" . $user->post - "<br>";
-                echo "Phone:" . $user->phone - "<br>";
-                echo "Gender:" . $user->gender - "<br>";
-                echo "Birthday:" . $user->birthday - "<br>";
-                echo "Admin status:" . $user->isAdmin - "<br>";
+                echo "Username:" . $user->username . "<br>";
+                echo "E-Mail:" . $user->email . "<br>";
+                echo "Address:" . $user->address . "<br>";
+                echo "Post:" . $user->post . "<br>";
+                echo "Phone:" . $user->phone . "<br>";
+                echo "Gender:" . $user->gender . "<br>";
+                echo "Birthday:" . $user->birthday . "<br>";
+                echo "Admin status:" . $user->isAdmin . "<br>";
             ?>
         </div>
     </div>

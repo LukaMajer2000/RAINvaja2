@@ -1,4 +1,4 @@
-<!-- 'vmesnik' med navadno stranjo in stranjo za admina, vse zahteve gredo preko te datoteke
+<!-- 'vmesnik' med navadno stranjo in stranjo za admina, vse zahteve gredo preko te datoteke-->
 
 <?php
 

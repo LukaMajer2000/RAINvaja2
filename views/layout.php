@@ -19,18 +19,19 @@
 			</button>
 			<div>
 				<ul>
-					<li class="nav-item <?php if($Controller!="ads") echo("active");?>"><a class="nav-link" gref="index.php">Home</a></li>
-					<li class="nav-item"><a class="nav-link" gref="myAd.php">My ADs</a></li>
-					<li class="nav-item"><a class="nav-link" gref="upload.php">Upload AD</a></li>
+					<li class="nav-item <?php if($Controller!="ads") echo("active");?>"><a href="index.php">Home</a></li>
+					<li class="nav-item"><a href="myAd.php">My ADs</a></li>
+					<li class="nav-item"><a href="upload.php">Upload AD</a></li>
 				</ul>
 
 		<ul>
 			<?php
-				$conn = new mysqli("localhost", "root", "", "vaja2");
+				$conn = new mysqli("localhost", "root", "", "vaja1");
 				$conn->set_charset("UTF8");
 				$id = $_SESSION["USER_ID"];
 				$res = mysqli_query($conn,"SELECT * FROM users where id='$id'");
-				if($row["isAdmin"!=null]){
+				$row = mysqli_fetch_assoc($res);
+				if($row["isAdmin"]!=null){
 					?>
 						<li><a href="?Controller=users&action=index"><i class="fas fa-user"></i>Admin Page</a></li>
 					<?php
