@@ -11,17 +11,19 @@ if(isset($_SERVER["PATH_INFO"])){
 $Db=mysqli_connect("localhost", "root", "", "vaja1");
 $Db->set_charset("UTF8");
 
+$comments_Controller = new comments_Controller;
+
 if(isset($request[0])&&($request[0]=="comments")){
     switch($method){
 
         case 'PUT':
             if(isset($request[1])){
                 $commentID = $request[1];
-                $comment = Comment::loadOneComment($Db,$commentID);
+                $comments_Controller->loadOneComment($Db,$commentID);
                 $input = json_decode(file_get_contents("php://input"),true);
 
                 if(isset($input)){
-                    $comment->title=$input["title"];
+                    //$comment->title=$input["title"];
                     $comment->content=$input["content"];
                     $comment->refreshComments($Db);
                 }else{
@@ -48,11 +50,11 @@ if(isset($request[0])&&($request[0]=="comments")){
         case 'GET':
                 if(isset($request[1]) && isset($request[2]) && $request[1]=="loadOneComment"){
                     $commentID = $request[2];
-                    $comment = Comment::loadOneComment($Db, $commentID);
+                    $comments_Controller->loadOneComment($Db, $commentID);
                 }else if(isset($request[1])&&isset($request[2])&&$request[1]=='loadAllComments'){
-                    $comment=Comment::loadAllComments($Db,$request[2]);
+                    $comments_Controller->loadAllComments($Db,$request[2]);
                 }else if(isset($request[1])&&$request[1]=='loadLastFiveComments'){
-                    $comment=Comment::loadLastFiveComments($Db);
+                    $comments_Controller->loadLastFiveComments($Db);
                 }
             break;
 
@@ -60,7 +62,7 @@ if(isset($request[0])&&($request[0]=="comments")){
         case 'DELETE':
             if(isset($request[1]) && isset($request[2])){
                 $commentID = $request[2];
-                Comment::deleteComment($Db,$commentID);
+                $comments_Controller->deleteComment($Db,$commentID);
                 $comment=array("info"=>"Comment deleted.");
             }else{
                 $comment=array("info"=>"No comment content.");

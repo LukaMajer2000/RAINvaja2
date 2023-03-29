@@ -125,11 +125,11 @@ CREATE TABLE IF NOT EXISTS `images` (
 CREATE TABLE IF NOT EXISTS `comments`(
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
-  `content` int(11) NOT NULL,
-  `nickname` int(11) NOT NULL,
+  `content` text COLLATE utf8_slovenian_ci,
+  `nickname` text COLLATE utf8_slovenian_ci,
   `date` datetime DEFAULT NULL,
-  `email` int(11) NOT NULL,
+  `email` text COLLATE utf8_slovenian_ci,
   `adid` int(11) NOT NULL,
-  `ip` int(11) NOT NULL,
+  `ip` text COLLATE utf8_slovenian_ci,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;

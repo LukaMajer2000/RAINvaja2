@@ -5,6 +5,7 @@ class Comment{
     public $content;
     public $nickname;
     public $date;
+    public $email;
     public $adid;
     public $ip;
 
@@ -25,6 +26,7 @@ class Comment{
         $content=$this->content;
         $nickname=$this->nickname;
         $date=$this->date;
+        $adid=$this->adid;
         $query="UPDATE comments SET user_id='$user_id',content='$content',nickname='$nickname',date='$date',adid='$adid' WHERE id=$id;";
         $res = mysqli_query($Db,$query);
         
@@ -124,9 +126,8 @@ class Comment{
             var_dump(mysqli_error($Db));
             exit();
         }
-
-        $country = Comment::countryOfOrigin($row["ip"]);
         $row = mysqli_fetch_assoc($res);
+        $country = Comment::countryOfOrigin($row["ip"]);
         $comment =  new Comment($row["id"],$row["user_id"],$row["content"],$row["nickname"],$row["date"],$row["email"],$row["adid"],$country);
 
         return $comment;
