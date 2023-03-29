@@ -1,6 +1,6 @@
 <?php
 
-//kontroler za delo z oglasi COMMIT COMMIT
+//kontroler za delo z oglasi COMMIT COMMIT LAPTOP COMMITITITITITIT
 class comments_Controller{
 
     public function index($adid)
