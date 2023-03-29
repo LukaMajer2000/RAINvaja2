@@ -21,7 +21,7 @@ if(isset($_GET["adid"])){
 <h2>Add new comment to post:</h2>
 <div>
     <form method="post">
-        <input id="ip" name="ip" type="hidden" type="text" value="<?php echo $_SERVER["Remote_ADDR"];?>"/>
+        <input id="ip" name="ip" type="hidden" type="text" value="<?php echo $_SERVER["REMOTE_ADDR"];?>"/>
 
         <label for="nickname">Ad ID:</label><input id="adid" type="text" name="adid" value="<?php echo $_GET["adid"];?>" <?php echo "readonly";?>/><br>
 
@@ -33,7 +33,7 @@ if(isset($_GET["adid"])){
 
         <label for="content">Content:</label><textarea id="content" name="content" cols="20" rows="10"></textarea><br>
 
-        <input id="send" type="submit" name="add" value="add"/>
+        <input id="send" type="submit" name="add" value="Add"/>
     </form>
 </div>
 
