@@ -1,0 +1,106 @@
+<?php if (isset($_SESSION["USER_ID"])) { ?>
+	<h4>Add a comment:</h4>
+	<input type="text" name="content" id="commentContent"/>
+	<button id="createComment">Add comment!</button>
+<?php } ?>
+
+<h5>Comments:</h5>
+<table class="table table-bordered w-75 col-md-6 offset-md-3 text-center">
+	<thead>
+		<tr>
+			<th>TEST COMMENT</th>
+		</tr>
+	</thead>
+	<tbody id="commentsBody">
+	</tbody>
+</table>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+	
+	$(document).ready(async function (){
+		console.log("Prepare the createComment and commentsBody");
+		await load();
+		$("#createComment").click(createsComment);
+		$("#commentsBody").on("click",".deleteComment", deleteCLick);
+	});
+
+
+	async function load(){
+		console.log("Load the comments.");
+		await $.get("/api.php/comments?id=<?php echo $id; ?>", printComments);
+		console.log("Load the comments.");
+	}
+
+	function getIP(ip){
+		return new Promise((resolve) => {
+			if(ip === "::1"){
+				resolve("localhost");
+			}else{
+				$.getJSON(`http://ip-api.com/json/${ip}`, function (data) {
+					if(data.status === "success"){
+						resolve(data.country);
+					}else{
+						resolve("Unknown");
+					}
+				});
+			}
+		});
+		console.log("Get the IPs.");
+	}
+
+	function createsComment(){
+		var data = {
+			content: $("#commentContent").val(),
+			adid: '<?php echo $id; ?>'
+		}
+		$("#commentContent").val("");
+		$.post("api.php/comments/<?php echo $id; ?>", data, function(data){
+			var row = document.createElement("tr");
+			row.id = data.id;
+			row.innerHTML = "<td>" + data.content + "</td>";
+			row.innerHTML += "<td><button class='deleteComment'>Delete</button></td>";
+			$(".deleteComment",row).click(deleteCLick);
+			$("#commentsBody").append(row);
+		});
+		console.log("Comment created!");
+	}
+
+	function printComments(comments){
+		var adID = '<?php echo $ad->user_id; ?>';
+		var userID = '<?php echo $_SESSION["USER_ID"]; ?>';
+
+		comments.forEach(function (comment){
+			var row = document.createElement("tr");
+			row.id = comment.id;
+			row.innerHTML = "<td>" + comment.content + "</td><td>";
+
+			getIP(comment.ip).then(function (country){
+				row.innerHTML += "<td>" + country +"</td>";
+			});
+
+			if(comment.user_id === userID || adID === userID){
+				row.innerHTML += "<td><button class='deleteComment'>Delete</button></td>";
+			}else{
+				row.innerHTML += "<td></td>";
+			}
+			$("#commentsBody").append(row);
+		});
+		console.log("Comments printed.");
+	}
+
+	function commentDelete(row){
+		var id = row.attr("id");
+		$.ajax({
+			url: 'api.php/comments/' + id,
+			method: 'DELETE'
+		});
+		console.log("Comment deleted!");
+	}
+
+	function deleteCLick(){
+		var row = $(this).closest("tr");
+		commentDelete(row);
+		row.remove();
+	}
+</script>
