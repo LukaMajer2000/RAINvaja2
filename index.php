@@ -1,6 +1,9 @@
 <?php
 include_once('header.php');
 
+require_once "connection.php";
+$Db = Db::getInstance();
+
 //Funkcija prebere oglase iz baze in vrne polje objektov
 function get_ads(){
 	global $conn;
@@ -46,8 +49,31 @@ usort($ads, function($a, $b){
 });
 
 //delete
+
+$query = "SELECT comments.*, ads.id as adid, ads.title as adTitle FROM comments
+                  INNER JOIN ads ON comments.adid = ads.id
+                  ORDER BY comments.id DESC
+                  LIMIT 5";
+$res = $Db->query($query);
+$comments = array();
+while ($comment = $res->fetch_object()) {
+	array_push($comments, $comment);
+}
+
 ?>
 
+
+
+<div class="comment col-md-6 offset-md-3 text-center bg-light">
+
+<h3>Latest comments:</h3>
+<?php
+foreach ($comments as $comment) {
+	echo "<p>{$comment->content} - <a href=\"ad.php?id={$comment->adid}\">{$comment->adTitle}</a></p>";
+}
+?>
+
+</div>
 
 <?php
 // read more
@@ -84,6 +110,11 @@ foreach($ads as $ad){
 	<?php
 }
 
+?>
+
+
+
+<?php
 
 include_once('footer.php');
 ?>

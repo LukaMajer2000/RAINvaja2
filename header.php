@@ -1,6 +1,8 @@
 <?php
 	session_start();
 	
+    require_once "connection.php";
+
 	//Seja poteče po 30 minutah - avtomatsko odjavi neaktivnega uporabnika
 	if(isset($_SESSION['LAST_ACTIVITY']) && time() - $_SESSION['LAST_ACTIVITY'] < 1800){
 		session_regenerate_id(true);
