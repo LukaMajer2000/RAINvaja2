@@ -24,11 +24,7 @@ function call($Controller, $action)
 $Controllers = array(
   'pages' => ['home', 'error'],
   'users' => ['add', 'delete', 'edit', 'editConfirm', 'save', 'clean', 'index', 'display'],
-<<<<<<< HEAD
   'comments' => ['index','show','store','delete']
-=======
-  'comments' => ['refreshComments','countryOfOrigin','addComment','deleteComment','loadAllComments','loadOneComment','loadLastFiveComments']
->>>>>>> 90c46295e909359b381ad2cd75e4268ba7c9e5f8
 );
 
 // Preverimo, če zahteva kliče controller in akcijo iz zgornjega seznama

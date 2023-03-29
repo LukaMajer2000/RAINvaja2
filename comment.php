@@ -20,28 +20,10 @@ class Comment{
         $this->ip=$ip;
     }
 
-<<<<<<< HEAD
     public function addComment($user_id,$content,$nickname,$date,$email,$adid,$ip){
         $Db = Db::getInstance();
         $content = mysqli_real_escape_string($Db, $content);
         $query="INSERT INTO comments(user_id,content,nickname,date,email,adid,ip) VALUES ('$user_id','$content','$nickname','$date','$email','$adid','$ip')";
-=======
-    public function refreshComments($Db){
-        $id=$this->id;
-        $user_id=$this->user_id;
-        $content=$this->content;
-        $nickname=$this->nickname;
-        $date=$this->date;
-        $adid=$this->adid;
-        $query="UPDATE comments SET user_id='$user_id',content='$content',nickname='$nickname',date='$date',adid='$adid' WHERE id=$id;";
-        $res = mysqli_query($Db,$query);
-        
-        if(mysqli_error($Db)){
-            var_dump(mysqli_error($Db));
-            exit();
-        }
-    }
->>>>>>> 90c46295e909359b381ad2cd75e4268ba7c9e5f8
 
         if($Db->$query($query)){
             $id = mysqli_real_escape_string($Db, $content);
@@ -61,14 +43,6 @@ class Comment{
         }else{
             return false;
         }
-<<<<<<< HEAD
-=======
-        $row = mysqli_fetch_assoc($res);
-        $country = Comment::countryOfOrigin($row["ip"]);
-        $comment =  new Comment($row["id"],$row["user_id"],$row["content"],$row["nickname"],$row["date"],$row["email"],$row["adid"],$country);
-
-        return $comment;
->>>>>>> 90c46295e909359b381ad2cd75e4268ba7c9e5f8
     }
 
     public function loadAllComments($adid){
