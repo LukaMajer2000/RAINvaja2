@@ -1,16 +1,16 @@
 <?php
 
-require_once "connection.php"; //uporabimo povezavo na bazo iz MVC
-require_once "comment.php"; //uporabimo model Ad iz MVC
-require_once "controllers/comments_Controller.php"; //vključimo API controller
+require_once "connection.php"; 
+require_once "comment.php"; 
+require_once "controllers/comments_Controller.php"; 
 
 session_start();
 
 $comments_controller = new comments_Controller;
 
-//nastavimo glave odgovora tako, da brskalniku sporočimo, da mu vračamo json
+// nastavimo glave odgovora tako, da brskalniku sporočimo, da mu vračamo json
 header('Content-Type: application/json');
-//omgočimo zahtevo iz različnih domen
+// omgočimo zahtevo iz različnih domen
 header("Access-Control-Allow-Origin: *");
 // Kot odgovor iz API-ja izpišemo JSON string s pomočjo funkcije json_encode
 
@@ -24,9 +24,7 @@ if(isset($_SERVER['PATH_INFO']))
 else
 	$request="";
 
-// Najprej potrebujemo 'router', ki bo razpoznal zahtevo in sprožil ustrezne akcije
-// Preverimo, če je v url-ju prva pot 'ads'
-if(!isset($request[0]) || $request[0] != "ads"){
+if(!isset($request[0]) || $request[0] != "comments"){
     echo json_encode((object)["status"=>"404", "message"=>"Not found"]);
     die();
 }

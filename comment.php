@@ -20,7 +20,7 @@ class Comment{
         $this->ip=$ip;
     }
 
-    public function addComment($user_id,$content,$nickname,$date,$email,$adid,$ip){
+    public static function addComment($user_id,$content,$nickname,$date,$email,$adid,$ip){
         $Db = Db::getInstance();
         $content = mysqli_real_escape_string($Db, $content);
         $query="INSERT INTO comments(user_id,content,nickname,date,email,adid,ip) VALUES ('$user_id','$content','$nickname','$date','$email','$adid','$ip')";
@@ -33,9 +33,9 @@ class Comment{
         }
     }
 
-    public function deleteComment(){
+    public static function deleteComment(){
         $Db = Db::getInstance();
-        $id = mysqli_real_escape_string($Db, $this->id);
+        $id = mysqli_real_escape_string($Db, $_GET["id"]);
         $query="SELECT * FROM comments WHERE id='$id'";
 
         if($Db->$query($query)){
@@ -45,7 +45,7 @@ class Comment{
         }
     }
 
-    public function loadAllComments($adid){
+    public static function loadAllComments($adid){
         $Db = Db::getInstance();
         $query="SELECT * FROM comments WHERE comments.adid = '$adid'";
         $res = $Db->query($query);
@@ -59,9 +59,9 @@ class Comment{
         return $comments;
     }
 
-    public function findOneComment($id){
+    public static function findOneComment($id){
         $Db = Db::getInstance();
-        $id = mysqli_real_escape_string($Db, $this->id);
+        $id = mysqli_real_escape_string($Db, $_GET["id"]);
         $query="SELECT * FROM comments WHERE comments.id = '$id'";
         $res = $Db->query($query);
 

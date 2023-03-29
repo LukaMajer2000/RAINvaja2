@@ -61,46 +61,125 @@ if($ad == null){
 		<a href="index.php"><button class="btn btn-primary">Back</button></a>
 	</div>
 	<hr/>
-	<div class="comment">
-		<p>Comments:</p>
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-		<script type="text/javascript">
-		function deleted($id){
-			$.ajax({
-				url:"/api/comments/deleteComment" + $id,
-				method : "DELETE",
-				success: function(data){
-					console.log(data);
-					location.reaload();
-				}
-			})
-		}
-		$(document).ready(function() {
-		    $.ajax({
-		    	url: "/api/comments/loadAllComments" + <?php echo $ad->id;?>,
-		    	method: "GET",
-		        success: function(data){
-				console.log(data);
-				data.forEach(comment => {
-					$(".comments").append(`<h3>${comment.nickname} (${comment.email}) je ${comment.date} (${comment.ip}) Comment by: </h3><p>${comment.content}</p>`);
-					<?php
-					if(isset($_SESSION["USER_ID"])){
-						if($ad->user_id==$_SESSION["USER_ID"]){
-							echo "$('.comments'.append(`<button onclick='deleted(\${comment.id})'>Delete</button></p>`)";
-						}
-					}
-					?>
-				})
-				}
-			})
-		});
-		</script>
-		<a href="uploadComment.php?adid=<?php echo $ad->id?>"><button>Add comment:</button></a>
-	</div>
 
+<div class="comment col-md-6 offset-md-3 text-center bg-light">	
+
+<?php if (isset($_SESSION["USER_ID"])): ?>
+	<h4>Add a comment:</h4>
+	<input type="text" name="content" id="commentContent"/>
+	<button id="createComment">Add comment!</button>
+<?php endif; ?>
+
+<h5>Comments:</h5>
+<table class="table table-bordered text-center">
+	<thead>
+		<tr>
+			<th>Contents:</th>
+			<th>IP Address:</th>
+			<th>Delete:</th>
+		</tr>
+	</thead>
+	<tbody id="commentsBody">
+	</tbody>
+</table>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+	$(document).ready(async function () {
+		console.log("Document ready.");
+		await loadComments();
+		$("#createComment").click(createComment);
+		$("#commentsBody").on("click", ".deleteComment", deleteComment);
+	});
+
+	async function loadComments() {
+    console.log("Loading comments...");
+    const comments = await $.get(`api.php/comments?id=<?php echo $id; ?>`);
+    console.log(`Comments loaded: ${JSON.stringify(comments)}`);
+    if (Array.isArray(comments)) {
+        for (const comment of comments) {
+            const row = document.createElement("tr");
+            row.id = comment.id;
+            row.innerHTML = `<td>${comment.content}</td><td class="ipAddress"></td><td><button class="deleteComment">Delete</button></td>`;
+            $(".deleteComment", row).click(deleteComment);
+            getIP(comment.ip).then(ip => {
+                $(".ipAddress", row).text(ip);
+            });
+            $("#commentsBody").append(row);
+        }
+    } else {
+        const row = document.createElement("tr");
+        row.id = comments.id;
+        row.innerHTML = `<td>${comments.content}</td><td class="ipAddress"></td><td><button class="deleteComment">Delete</button></td>`;
+        $(".deleteComment", row).click(deleteComment);
+        getIP(comments.ip).then(ip => {
+            $(".ipAddress", row).text(ip);
+        });
+        $("#commentsBody").append(row);
+    }
+    console.log("Comments loaded.");
+}
+
+	async function getIP(ip) {
+	console.log(`Fetching IP information for ${ip}...`);
+	return new Promise((resolve) => {
+		if (ip === "::1") {
+			resolve("localhost");
+		} else {
+			$.getJSON(`http://ip-api.com/json/${ip}`, function (data) {
+				if (data.status === "success") {
+					resolve(data.country);
+				} else {
+					resolve("Unknown");
+				}
+			});
+		}
+	});
+}
+
+	async function createComment() {
+		console.log("Creating comment...");
+		const content = $("#commentContent").val();
+		if (!content) {
+			alert("Please enter a comment.");
+			return;
+		}
+		const data = { content, adid: "<?php echo $id; ?>" };
+		$("#commentContent").val("");
+		const comment = await $.post(`api.php/comments/<?php echo $id; ?>`, data);
+		const row = document.createElement("tr");
+		row.id = comment.id;
+		row.innerHTML = `<td>${comment.content}</td><td class="ipAddress"></td><td><button class="deleteComment">Delete</button></td>`;
+		$(".deleteComment", row).click(deleteComment);
+		getIP(comment.ip).then(ip => {
+			$(".ipAddress", row).text(ip);
+		});
+		$("#commentsBody").append(row);
+		console.log("Comment created!");
+	}
+
+	async function deleteComment() {
+  const commentId = $(this).closest("tr").attr("id");
+  if (!confirm("Are you sure you want to delete this comment?")) {
+    return;
+  }
+  await $.ajax({
+    url: `api.php/comments/${commentId}`,
+    type: "DELETE",
+    success: function () {
+      $(`#${commentId}`).remove();
+      console.log("Comment deleted.");
+    },
+    error: function () {
+      alert("Failed to delete comment.");
+    },
+  });
+}
+</script>
+
+</div>
 
 <?php
-
 function categoriesGet($id){
 	global $conn;
 	$id = mysqli_real_escape_string($conn, $id);

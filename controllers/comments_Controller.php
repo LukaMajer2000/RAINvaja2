@@ -1,18 +1,23 @@
 <?php
 
-//kontroler za delo z oglasi COMMIT COMMIT LAPTOP COMMITITITITITIT
+//kontroler za delo z oglasi
+
+require_once "connection.php";
+require_once "comment.php"; 
+
 class comments_Controller{
 
     public function index($adid)
     {
         // Iz modela pidobimo vse oglase
+        
         $comments = Comment::loadAllComments($adid);
 
         //izpišemo $ads v JSON formatu
         echo json_encode($comments);
     }
 
-    public function show($id)
+    public static function show($id)
     {
         $comments = Comment::findOneComment($id);
         echo json_encode($comments);
