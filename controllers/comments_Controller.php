@@ -1,7 +1,6 @@
 <?php
 
-<<<<<<< HEAD
-//kontroler za delo z oglasi
+//kontroler za delo z oglasi COMMIT COMMIT
 class comments_Controller{
 
     public function index($adid)
@@ -42,6 +41,7 @@ class comments_Controller{
         echo json_encode($comments);
     }
 }
+<<<<<<< HEAD
 =======
 $Db=mysqli_connect("localhost", "root", "", "vaja1");
 $Db->set_charset("UTF8");
@@ -106,3 +106,5 @@ class comments_Controller{
 
 ?>
 >>>>>>> 90c4629 (Pozabo commit)
+=======
+>>>>>>> 120217e (Problem z mergom)

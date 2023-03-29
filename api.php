@@ -59,6 +59,7 @@ switch($method){
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 $comments_Controller = new comments_Controller;
 
@@ -137,3 +138,5 @@ if(isset($request[0]) && ($request[0]=="proxy")){
 
 ?>
 >>>>>>> 90c4629 (Pozabo commit)
+=======
+>>>>>>> 120217e (Problem z mergom)

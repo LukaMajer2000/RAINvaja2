@@ -24,11 +24,13 @@ function call($Controller, $action)
 $Controllers = array(
   'pages' => ['home', 'error'],
   'users' => ['add', 'delete', 'edit', 'editConfirm', 'save', 'clean', 'index', 'display'],
-<<<<<<< HEAD
   'comments' => ['index','show','store','delete']
+<<<<<<< HEAD
 =======
   'comments' => ['refreshComments','countryOfOrigin','addComment','deleteComment','loadAllComments','loadOneComment','loadLastFiveComments']
 >>>>>>> 90c4629 (Pozabo commit)
+=======
+>>>>>>> 120217e (Problem z mergom)
 );
 
 // Preverimo, če zahteva kliče controller in akcijo iz zgornjega seznama

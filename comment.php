@@ -20,11 +20,11 @@ class Comment{
         $this->ip=$ip;
     }
 
-<<<<<<< HEAD
     public function addComment($user_id,$content,$nickname,$date,$email,$adid,$ip){
         $Db = Db::getInstance();
         $content = mysqli_real_escape_string($Db, $content);
         $query="INSERT INTO comments(user_id,content,nickname,date,email,adid,ip) VALUES ('$user_id','$content','$nickname','$date','$email','$adid','$ip')";
+<<<<<<< HEAD
 =======
     public function refreshComments($Db){
         $id=$this->id;
@@ -42,6 +42,8 @@ class Comment{
         }
     }
 >>>>>>> 90c4629 (Pozabo commit)
+=======
+>>>>>>> 120217e (Problem z mergom)
 
         if($Db->$query($query)){
             $id = mysqli_real_escape_string($Db, $content);
@@ -62,6 +64,7 @@ class Comment{
             return false;
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         $row = mysqli_fetch_assoc($res);
         $country = Comment::countryOfOrigin($row["ip"]);
@@ -69,6 +72,8 @@ class Comment{
 
         return $comment;
 >>>>>>> 90c4629 (Pozabo commit)
+=======
+>>>>>>> 120217e (Problem z mergom)
     }
 
     public function loadAllComments($adid){
