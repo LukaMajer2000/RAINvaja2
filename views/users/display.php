@@ -1,4 +1,4 @@
-<div>
+<div  class="col-md-6 offset-md-3 text-center bg-light">
     <div>
         <div>
             <h2><?php echo $user->username; ?></h2>
@@ -13,7 +13,7 @@
                 echo "Phone:" . $user->phone . "<br>";
                 echo "Gender:" . $user->gender . "<br>";
                 echo "Birthday:" . $user->birthday . "<br>";
-                echo "Admin status:" . $user->isAdmin . "<br>";
+                //echo "Admin status:" . $user->isAdmin . "<br>";
             ?>
         </div>
     </div>
