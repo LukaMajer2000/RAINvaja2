@@ -67,7 +67,7 @@ if($ad == null){
 <?php if (isset($_SESSION["USER_ID"])): ?>
 	<h4>Add a comment:</h4>
 	<input type="text" name="content" id="commentContent"/>
-	<button id="createComment">Add comment!</button>
+	<button class="btn btn-primary text-primary bg-light" id="createComment">Add comment!</button>
 <?php endif; ?>
 
 <h5>Comments:</h5>
@@ -133,7 +133,7 @@ if($ad == null){
 			var row = document.createElement("tr");
 			row.id = data.id;
 			row.innerHTML = "<td>" + data.content + "</td>";
-			row.innerHTML += "<td><button class='deleteComment'>Delete</button></td>";
+			row.innerHTML += "<td><button class='deleteComment btn btn-primary text-primary bg-light'>Delete</button></td>";
 			$(".deleteComment",row).click(deleteCLick);
 			$("#commentsBody").append(row);
 		});
@@ -154,7 +154,7 @@ if($ad == null){
 			});
 
 			if(comment.user_id === userID || adID === userID){
-				row.innerHTML += "<td><button class='deleteComment'>Delete</button></td>";
+				row.innerHTML += "<td><button class='deleteComment btn btn-primary text-primary bg-light'>Delete</button></td>";
 			}else{
 				row.innerHTML += "<td></td>";
 			}
