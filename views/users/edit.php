@@ -1,3 +1,4 @@
+<div  class="col-md-6 offset-md-3 text-center bg-light">
 <h2>Edit user: <?php echo $user->username; ?></h2>
 <form action="?Controller=users&action=editConfirm" method="POST" enctype="multipart/form-data">
     <div class="form-group">
@@ -12,6 +13,7 @@
         <label for="gender">Gender:</label><input type="text" name="gender" value="<?php echo $user->gender;?>"/><br>
         <label for="birthday">Birthday:</label><input type="text" name="birthday" value="<?php echo $user->birthday;?>"/><br>
         <label for="isAdmin">Admin:</label><input type="text" name="isAdmin" value="<?php echo $user->isAdmin;?>"/><br>
-        <input type="submit" name="confirm" value="Confirm"/>
+        <input class="btn btn-secondary text-info bg-light " type="submit" name="confirm" value="Confirm"/>
     </div>
 </form>
+</div>

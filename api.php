@@ -40,8 +40,9 @@ switch($method){
         }
         break;
     case "POST": 
-        $adid = $_GET['id'];
-        $comments_controller->store($adid);
+        //$adid = $_GET['id'];
+        $comments_controller->store();
+
         break;
     case "DELETE":
         if(!isset($request[1])){

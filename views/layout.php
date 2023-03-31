@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <head>
 	<title>Admin</title>
@@ -10,21 +14,14 @@
 </head>
 <body>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+	
+	<div style="text-align: center;">
 	<h1>BootlegEbay Admin Page</h1>
-	<div>
 		<nav>
-			<a href="myProfile.php">Profile control:</a>
-			<button type="button" data-toggle="collapse">
-				<span></span>
-			</button>
-			<div>
-				<ul>
-					<li class="nav-item <?php if($Controller!="ads") echo("active");?>"><a href="index.php">Home</a></li>
-					<li class="nav-item"><a href="myAd.php">My ADs</a></li>
-					<li class="nav-item"><a href="upload.php">Upload AD</a></li>
-				</ul>
-
-		<ul>
+		<button class="btn btn-primary text-white bg-light"><a href="myProfile.php">Profile</a></button>
+		<button class="btn btn-primary text-white bg-light" class="nav-item <?php if($Controller!="ads") echo("active");?>"><a href="index.php">Home</a></button>
+		<button class="btn btn-primary text-white bg-light" class="nav-item"><a href="myAd.php">My ADs</a></button>
+		<button class="btn btn-primary text-white bg-light" class="nav-item"><a href="upload.php">Upload AD</a></button>
 			<?php
 				$conn = new mysqli("localhost", "root", "", "vaja1");
 				$conn->set_charset("UTF8");
@@ -33,14 +30,13 @@
 				$row = mysqli_fetch_assoc($res);
 				if($row["isAdmin"]!=null){
 					?>
-						<li><a href="?Controller=users&action=index"><i class="fas fa-user"></i>Admin Page</a></li>
+						<button class="btn btn-primary text-white bg-light"><a href="?Controller=users&action=index"><i class="fas fa-user"></i>Admin Page</a></button>
 					<?php
 				}
 				?>
-					<li><a href="logOut.php"><i class="fas fa-sign-int-alt"></i>Log Out</a></li>
+					<button class="btn btn-primary text-white bg-light"><a href="logOut.php"><i class="fas fa-sign-int-alt"></i>Log Out</a></button>
 				<?php
 			?>
-		</ul>
 		</div>
 		</nav>
 

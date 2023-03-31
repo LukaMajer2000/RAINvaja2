@@ -126,9 +126,6 @@ CREATE TABLE IF NOT EXISTS `comments`(
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `user_id` VARCHAR(23) COLLATE utf8_slovenian_ci NOT NULL,
   `content` text COLLATE utf8_slovenian_ci NOT NULL,
-  `nickname` text COLLATE UTF8_SLOVENIAN_CI DEFAULT NULL,
-  `date` datetime DEFAULT NULL,
-  `email` text COLLATE UTF8_SLOVENIAN_CI DEFAULT NULL,
   `adid` VARCHAR(23) COLLATE utf8_slovenian_ci NOT NULL,
   `ip` VARCHAR(45) NOT NULL,
 <<<<<<< HEAD
